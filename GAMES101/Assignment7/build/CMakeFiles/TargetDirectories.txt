@@ -1,0 +1,3 @@
+/Users/caishuxian/Documents/Computer Graphics/GAMES101 - 现代计算机图形学入门/Assignment7/Assignment7/build/CMakeFiles/rebuild_cache.dir
+/Users/caishuxian/Documents/Computer Graphics/GAMES101 - 现代计算机图形学入门/Assignment7/Assignment7/build/CMakeFiles/edit_cache.dir
+/Users/caishuxian/Documents/Computer Graphics/GAMES101 - 现代计算机图形学入门/Assignment7/Assignment7/build/CMakeFiles/Assignment7.dir
