@@ -25,27 +25,27 @@ This list emphasizes that it is really the halfedges that connect everything up.
 For example, suppose we have a face f and want to print out the positions of all its vertices. We would write a routine like this:
 ```cpp
 void printVertexPositions(FaceRef f) {
-	HalfedgeRef h = f->halfegde();	  // get the first halfedge of the face
+	HalfedgeRef h = f->halfegde();	  	// get the first halfedge of the face
 	do {
-		VertexRef v = h->vertex();	    // get the vertex of the current halfedge
+		VertexRef v = h->vertex();	// get the vertex of the current halfedge
 		cout << v->pos << endl;	        // print the vertex position
-		h = h->next();			            // move to the next halfedge around the face
-	} while (h != f->halfedge());		  // keep going until we’re back at the beginning
+		h = h->next();			// move to the next halfedge around the face
+	} while (h != f->halfedge());		// keep going until we’re back at the beginning
 }
 ```
 
 Similarly, to print out the positions of all the neighbors of a given vertex we could write a routine like this:
 ```cpp
 void printNeighborPositions(VertexRef v) {
-	HalfedgeRef h = v->halfedge();	      // get one of the outgoing halfedge of the vertex
+	HalfedgeRef h = v->halfedge();	      		// get one of the outgoing halfedge of the vertex
 	do {
-		HalfedgeRef h_twin = h->twin();	    // get the vertex of the current halfedge
-		VertexRef vN = h_twin->vertex();	  // vertex is ‘source’ of the half edge
-							                          // so h->vertex() is v
-						                            // whereas h_twin->vertex() is the neighbor vertex
-		cout << vN->pos << endl;	          // print the vertex position
-		h = h_twin->next();		              // move to the next outgoing halfedge of the vertex
-	} while(h != v->halfedge());		      // keep going until we’re back at the beginning
+		HalfedgeRef h_twin = h->twin();	    	// get the vertex of the current halfedge
+		VertexRef vN = h_twin->vertex();	// vertex is ‘source’ of the half edge
+							// so h->vertex() is v
+						        // whereas h_twin->vertex() is the neighbor vertex
+		cout << vN->pos << endl;	        // print the vertex position
+		h = h_twin->next();		        // move to the next outgoing halfedge of the vertex
+	} while(h != v->halfedge());		      	// keep going until we’re back at the beginning
 }
 ```
 
