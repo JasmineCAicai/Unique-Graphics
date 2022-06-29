@@ -1,5 +1,7 @@
 # Halfedge Mesh
 
+![](https://github.com/JasmineCAicai/Unique-Graphics/blob/18b71b768fb232fe1aa5b5e1267ab7650faa149b/CMU15462/halfedge.png "The basic halfedge data structure")
+
 For an edge connecting two vertices i and j, one of its halfedges points from i to j; the other one points from j to i.
 - The two halfedges are oppositely oriented.
 - One of the halfedges is associated with the face to the “left” of the edge; the other is associated with the face to the “right”.
