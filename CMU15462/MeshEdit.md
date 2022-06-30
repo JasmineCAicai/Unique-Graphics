@@ -57,3 +57,17 @@ for(VertexRef v = vertices_begin(); v != vertices_end(); v++) {
 ```
 
 Need to consider whether the edge is the boundary.
+
+# Local Operations
+![](https://github.com/JasmineCAicai/Unique-Graphics/blob/3aec4caae9ae9c0e036c90b087a5058f539d1867/CMU15462/edge_flip.png "Edge flip")
+![](https://github.com/JasmineCAicai/Unique-Graphics/blob/3aec4caae9ae9c0e036c90b087a5058f539d1867/CMU15462/edge_split.png "Edge split")
+![](https://github.com/JasmineCAicai/Unique-Graphics/blob/3aec4caae9ae9c0e036c90b087a5058f539d1867/CMU15462/edge_collapse.png "Edge collapse")
+![](https://github.com/JasmineCAicai/Unique-Graphics/blob/3aec4caae9ae9c0e036c90b087a5058f539d1867/CMU15462/face_bevel.png "Face bevel")
+![](https://github.com/JasmineCAicai/Unique-Graphics/blob/3aec4caae9ae9c0e036c90b087a5058f539d1867/CMU15462/edge_bevel.png "Edge bevel")
+![](https://github.com/JasmineCAicai/Unique-Graphics/blob/3aec4caae9ae9c0e036c90b087a5058f539d1867/CMU15462/vertex_bevel.png "Vertex bevel")
+![](https://github.com/JasmineCAicai/Unique-Graphics/blob/3aec4caae9ae9c0e036c90b087a5058f539d1867/CMU15462/face_collapse.png "Face collapse")
+![](https://github.com/JasmineCAicai/Unique-Graphics/blob/3aec4caae9ae9c0e036c90b087a5058f539d1867/CMU15462/erase_edge.png "Erase edge")
+![](https://github.com/JasmineCAicai/Unique-Graphics/blob/3aec4caae9ae9c0e036c90b087a5058f539d1867/CMU15462/erase_vertex.png "Erase vertex")
+![](https://github.com/JasmineCAicai/Unique-Graphics/blob/3aec4caae9ae9c0e036c90b087a5058f539d1867/CMU15462/edge_bisect.png "Edge bisect")
+![](https://github.com/JasmineCAicai/Unique-Graphics/blob/3aec4caae9ae9c0e036c90b087a5058f539d1867/CMU15462/vertex_insert.png "Vertex insert")
+![](https://github.com/JasmineCAicai/Unique-Graphics/blob/3aec4caae9ae9c0e036c90b087a5058f539d1867/CMU15462/vertex_extrude.png "Vertex extrude")
