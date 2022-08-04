@@ -26,6 +26,8 @@
       - 输入图像的和的平方
 
 [参考链接 1](https://docs.opencv.org/3.4/df/dfb/group__imgproc__object.html#gga3a7850640f1fe1f58fe91a2d7583695dab65c042ed62c9e9e095a1e7e41fe2773)
+
+
 [参考链接 2](https://stackoverflow.com/questions/48799711/explain-difference-between-opencvs-template-matching-methods-in-non-mathematica)
 
 ## 模板匹配
@@ -69,7 +71,11 @@ void cv::matchTemplate(
 - 如果`setUseOptimized()`或`setUseOpenCL()`设置为 false，则将使用常规代码。
   
 [参考链接 1](https://stackoverflow.com/questions/42411157/what-is-the-macro-cv-ocl-run-used-for-in-opencv)
+
+
 [参考链接 2](https://docs.opencv.org/3.0-rc1/db/dfa/tutorial_transition_guide.html)
+
+
 [参考链接 3](https://blog.csdn.net/github_38148039/article/details/109469238)
 
 ### UMat
@@ -78,6 +84,8 @@ void cv::matchTemplate(
 - cv::UMat 旨在以一种方便的方式隐藏与 OpenCL 设备的数据交换。
 
 [参考链接 1](https://stackoverflow.com/questions/33602675/what-is-the-difference-between-umat-and-mat-in-opencv)
+
+
 [参考链接 2](https://docs.opencv.org/3.0-rc1/db/dfa/tutorial_transition_guide.html)
 
 ### 使用 Intel® Integrated Performance Primitives (IPP) 进行加速
