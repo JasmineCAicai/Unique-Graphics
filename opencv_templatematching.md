@@ -372,4 +372,71 @@ static void common_matchTemplate(
 )
 ```
 **基本过程：**
-1. 
+1. 定义变量
+   1. numType
+   2. isNormed
+   3. invArea
+   4. sum, sqsum
+   5. templMean, templSdv
+   6. q0, q1, q2, q3
+   7. templNorm, templSum2
+2. 如果方法为 CCOEFF，调用`integral(img, sum, CV_64F)`计算输入图像的积分，并计算模板图像的平均值；反之
+   1. 计算输入图像的积分和平方积分
+   2. 计算模板图像的平均值和标准差
+   3. 计算方差
+   4. 如果方差小于一定值，且方法为CCOEFF_NORMED，将 result 的各个位置上的数值全部设置为1，并返回
+   5. 计算平方的均值 templSum2
+   6. 如果方法不是 CCOEFF，则将模板平均值设置为0，并将 templNorm 设置为平方的均值
+   7. `templSum2 /= invArea;`
+   8. `templNorm = std::sqrt(templNorm);`
+   9. `templNorm /= std::sqrt(invArea);`
+   10. 定义变量 q0, q1, q2, q3
+3. 定义变量
+   1. p0, p1, p2, p3
+   2. sumstep
+   3. sqstep
+   4. i, j, k
+4. 遍历之前定义的 result 并计算结果
+   1. 定义变量
+      1. rrow
+      2. idx, idx2
+      3. num
+      4. wndMean2, wndSum2
+   2. 如果方法为 CCOEFF
+      1. 根据通道数量，分别
+         1. 计算待检测的区域的积分
+         2. `wndMean2 += t*t;`
+         3. `num -= t*templMean[k];`
+      2. `wndMean2 *= invArea;`
+   3. 如果方法为 Normed 或 SQDIFF
+      1. 根据通道数量，分别
+         1. 计算待检测的区域的平方积分（？
+         2. `wndSum2 += t;`
+      2. 如果方法为 SQDIFF，根据公式，计算`num = wndSum2 - 2*num + templSum2`，并更新`num = MAX(num, 0.)`
+   4. 如果方法为 Normed
+      1. 定义变量`diff2 = MAX(wndSum2 - wndMean2, 0)`
+      2. 如果 diff2 的值小于一定值，为了避免舍入误差，`t = 0`；反之`t = std::sqrt(diff2)*templNorm`
+      3. 如果`fabs(num) < t`，则`num /= t`；如果`fabs(num) < t*1.125`，则`num = num > 0 ? 1 : -1`；否则`num = method != CV_TM_SQDIFF_NORMED ? 0 : 1`
+   5. 在 result 的对应位置上更新计算好的结果
+5. 结束计算
+
+### 计算积分
+基于各个通道
+
+
+[参考链接](https://docs.rs/opencv/0.19.2/opencv/imgproc/fn.integral.html)
+
+### 计算平均值和标准差
+```c++
+void cv::meanStdDev(
+    InputArray src,
+    OutputArray mean,
+    OutputArray stddev,
+    InputArray mask = noArray()
+)
+```
+基于各个通道
+
+
+
+[参考链接](https://docs.opencv.org/3.4/d2/de8/group__core__array.html#ga846c858f4004d59493d7c6a4354b301d)
