@@ -470,7 +470,7 @@ void cv::meanStdDev(
 ```
 - 计算数组元素的平均值和标准差
 - 函数cv::meanStdDev独立计算每个通道数组元素的平均值和标准差M，并通过输出参数返回:
-  ![meanStdDev](/Users/caishuxian/Desktop/meanStdDev.png "meanStdDev")
+  ![meanStdDev](https://github.com/JasmineCAicai/Unique-Graphics/blob/master/meanStdDev.png "meanStdDev")
 - 当所有掩码元素都为0时，函数返回`mean=stddev=Scalar::all(0)`
 - 计算出的标准差只是完全归一化协方差矩阵的对角线
   - 如果需要完整的矩阵，可以将多通道数组 M x N 重塑为单通道数组 M*N x mtx.channels()
