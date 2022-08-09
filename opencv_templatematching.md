@@ -119,12 +119,14 @@ void crossCorr(
     int borderType 
 )
 ```
+kernel - template image
+
 ==**主要过程：**==
 ==1. 计算出合适的 dft 后的矩阵大小==
 ==2. 调整图像大小，填充图像边缘==
-==3. 将原图像和核部分都进行 dft 操作==
-==4. 计算相关性，在频域空间上相乘==
-==5. 将图像还原到原来的大小==
+==3. 将核部分进行 dft 操作==
+==4. 将原图像进行 dft 操作，并在频域空间上将原图像与模板图像相乘，计算相关性==
+==5. 将图像还原到原来的大小（inverse DFT）==
 
 **基本过程：**
 1. 定义变量
@@ -420,11 +422,42 @@ static void common_matchTemplate(
    5. 在 result 的对应位置上更新计算好的结果
 5. 结束计算
 
-### 计算积分
-基于各个通道
+### 计算图像积分 integral()
+- src：输入图像为内联公式，8位或浮点(32f或64f)
+- sum：内联公式的积分图像，32位整数或浮点数(32f或64f)
+- sqsum：平方像素值的积分图像;它是内联公式，双精度浮点(64f)数组
+- tilted：对旋转45度的图像积分;它是具有与sum相同数据类型的内联公式数组
+- sdepth：期望的积分深度和倾斜积分图像CV_32S, CV_32F，或CV_64F
+- sqdepth：平方像素值的积分图像的期望深度CV_32F或CV_64F
+
+该函数为源图像计算一个或多个积分图像，如下所示:
 
 
-[参考链接](https://docs.rs/opencv/0.19.2/opencv/imgproc/fn.integral.html)
+![sum](https://latex.codecogs.com/png.latex?%5Ctexttt%7Bsum%7D%20%28X%2CY%29%20%3D%20%20%5Csum%20_%7Bx%3CX%2Cy%3CY%7D%20%20%5Ctexttt%7Bimage%7D%20%28x%2Cy%29 "sum")
+
+
+![sqsum](https://latex.codecogs.com/png.latex?%5Ctexttt%7Bsqsum%7D%20%28X%2CY%29%20%3D%20%20%5Csum%20_%7Bx%3CX%2Cy%3CY%7D%20%20%5Ctexttt%7Bimage%7D%20%28x%2Cy%29%5E2 "sqsum")
+
+
+![tilted](https://latex.codecogs.com/png.latex?%5Ctexttt%7Btilted%7D%20%28X%2CY%29%20%3D%20%20%5Csum%20_%7By%3CY%2Cabs%28x-X%2B1%29%20%5Cleq%20Y-y-1%7D%20%20%5Ctexttt%7Bimage%7D%20%28x%2Cy%29 "tilted")
+
+
+使用这些积分图像，可以在恒定的时间内计算图像上特定的垂直或旋转矩形区域的总和、平均值和标准偏差，例如:
+
+
+![formula](https://latex.codecogs.com/png.latex?%5Csum%20_%7Bx_1%20%5Cleq%20x%20%3C%20x_2%2C%20%20%5C%2C%20y_1%20%20%5Cleq%20y%20%3C%20y_2%7D%20%20%5Ctexttt%7Bimage%7D%20%28x%2Cy%29%20%3D%20%20%5Ctexttt%7Bsum%7D%20%28x_2%2Cy_2%29-%20%5Ctexttt%7Bsum%7D%20%28x_1%2Cy_2%29-%20%5Ctexttt%7Bsum%7D%20%28x_2%2Cy_1%29%2B%20%5Ctexttt%7Bsum%7D%20%28x_1%2Cy_1%29 "formula")
+
+
+例如，它可以使用可变窗口大小进行快速模糊或快速块关联。对于多通道图像，每个通道的和是独立累加的。
+
+
+![Image Integral](https://docs.opencv.org/3.4.7/integral.png "Image Integral")
+
+
+[参考链接 1](https://docs.rs/opencv/0.19.2/opencv/imgproc/fn.integral.html)
+
+
+[参考链接 2](https://aishack.in/tutorials/integral-images-opencv/)
 
 ### 计算平均值和标准差
 ```c++
@@ -435,8 +468,16 @@ void cv::meanStdDev(
     InputArray mask = noArray()
 )
 ```
-基于各个通道
-
+- 计算数组元素的平均值和标准差
+- 函数cv::meanStdDev独立计算每个通道数组元素的平均值和标准差M，并通过输出参数返回:
+  ![meanStdDev](/Users/caishuxian/Desktop/meanStdDev.png "meanStdDev")
+- 当所有掩码元素都为0时，函数返回`mean=stddev=Scalar::all(0)`
+- 计算出的标准差只是完全归一化协方差矩阵的对角线
+  - 如果需要完整的矩阵，可以将多通道数组 M x N 重塑为单通道数组 M*N x mtx.channels()
+  - 仅当矩阵是连续的时候才可能
+  - 然后将该矩阵传递给 calcCovarMatrix
 
 
 [参考链接](https://docs.opencv.org/3.4/d2/de8/group__core__array.html#ga846c858f4004d59493d7c6a4354b301d)
+
+### DBL_EPSILON 2.2204460492503131e-16
