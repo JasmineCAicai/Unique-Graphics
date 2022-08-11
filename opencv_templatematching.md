@@ -106,7 +106,10 @@ static bool ipp_matchTemplate(
     int method
 )
 ```
-
+**基本过程：**
+1. 判断输入图像的通道数不是1，如果是，则返回 false
+2. 判断模板函数的大小是否与图像大小相当，如果是，则返回 false
+3. 根据匹配方法调用对应的函数
 
 ## 计算互相关性（Cross Correlation）
 ```c++
