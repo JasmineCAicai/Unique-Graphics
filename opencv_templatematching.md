@@ -30,6 +30,9 @@
 
 [参考链接 2](https://stackoverflow.com/questions/48799711/explain-difference-between-opencvs-template-matching-methods-in-non-mathematica)
 
+
+![模板匹配主要过程](https://github.com/JasmineCAicai/Unique-Graphics/blob/master/opencv_templMatch_general_procedure.png “模板匹配主要过程”)
+
 ## 模板匹配
 ```c++
 void cv::matchTemplate(
