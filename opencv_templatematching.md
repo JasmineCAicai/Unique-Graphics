@@ -483,6 +483,9 @@ static void common_matchTemplate(
 ![Image Integral](https://docs.opencv.org/3.4.7/integral.png "Image Integral")
 
 
+[integral() 如何提高运行时间](https://www.quora.com/How-integral-image-is-used-in-image-processing-and-how-improves-the-computation-time)
+
+
 [参考链接 1](https://docs.rs/opencv/0.19.2/opencv/imgproc/fn.integral.html)
 
 
