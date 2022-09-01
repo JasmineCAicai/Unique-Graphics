@@ -3,6 +3,7 @@
 [模板匹配源码](https://github.com/opencv/opencv/blob/4.x/modules/imgproc/src/templmatch.cpp)
 
 ## 假设
+- 无掩码
 - Source/Input - n x n
 - Template - m x m
 - Result/Output - (n-m+1) x (n-m+1)
