@@ -30,9 +30,6 @@
 
 [参考链接 2](https://stackoverflow.com/questions/48799711/explain-difference-between-opencvs-template-matching-methods-in-non-mathematica)
 
-
-![模板匹配主要过程](https://github.com/JasmineCAicai/Unique-Graphics/blob/master/opencv_templMatch_general_procedure.png)
-
 ## 模板匹配
 ```c++
 void cv::matchTemplate(
@@ -114,7 +111,7 @@ static bool ipp_matchTemplate(
 2. 判断模板函数的大小是否与图像大小相当，如果是，则返回 false
 3. 根据匹配方法调用对应的函数
 
-## 计算互相关性（Cross Correlation）
+## 计算互相关性（Cross Correlation）- 快速傅里叶变换（Fast Fourier Transform）
 ```c++
 void crossCorr(
     const Mat& img, 
@@ -125,14 +122,17 @@ void crossCorr(
     int borderType 
 )
 ```
+
+[如何理解傅里叶变换](https://github.com/JasmineCAicai/Unique-Graphics/blob/master/FourierTransform.pdf)
+
 kernel - template image
 
-==**主要过程：**==
-==1. 计算出合适的 dft 后的矩阵大小==
-==2. 调整图像大小，填充图像边缘==
-==3. 将核部分进行 dft 操作==
-==4. 将原图像进行 dft 操作，并在频域空间上将原图像与模板图像相乘，计算相关性==
-==5. 将图像还原到原来的大小（inverse DFT）==
+**主要过程：**
+1. 计算出合适的 dft 后的矩阵大小
+2. 调整图像大小，填充图像边缘
+3. 将核部分进行 dft 操作
+4. 将原图像进行 dft 操作，并在频域空间上将原图像与模板图像相乘，计算相关性
+5. 将图像还原到原来的大小（inverse DFT）
 
 **基本过程：**
 1. 定义变量
